@@ -18,15 +18,14 @@
             <DataTemplate x:Key="SwitchContent">
                 <Button
                     VerticalAlignment="Center"
-                    Classes="Link">
+                    Classes="Link"
+                    Click="OpenFilterPanelButton_Click">
                     <ContentPresenter Content="{Binding #root.OpenPanelButtonContent}" />
-                    <Button.Flyout>
-                        <v:PopupFlyout
-                            Closed="FileFilterPopup_Closed"
-                            OverlayDismissEventPassThrough="True">
-                            <v:FileFilterPanel Filter="{Binding #root.Filter}" />
-                        </v:PopupFlyout>
-                    </Button.Flyout>
+                    <!-- <Button.Flyout> -->
+                    <!--     <v:PopupFlyout Closed="FileFilterPopup_Closed"> -->
+                    <!--         <v:FileFilterPanel Filter="{Binding #root.Filter}" /> -->
+                    <!--     </v:PopupFlyout> -->
+                    <!-- </Button.Flyout> -->
 
                 </Button>
             </DataTemplate>

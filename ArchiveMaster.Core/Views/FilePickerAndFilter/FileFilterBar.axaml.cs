@@ -43,8 +43,10 @@ public partial class FileFilterBar : UserControl
         set => SetValue(FilterProperty, value);
     }
 
-    private void FileFilterPopup_Closed(object sender, EventArgs e)
+    private async void OpenFilterPanelButton_Click(object sender, RoutedEventArgs e)
     {
+        FileFilterDialog dialog = new FileFilterDialog(Filter);
+        await HostServices.GetRequiredService<IDialogService>().ShowCustomDialogAsync(dialog);
         var binding = BindingOperations.GetBindingExpressionBase(tbkFilterDescription, TextBlock.TextProperty);
         binding?.UpdateTarget();
     }
