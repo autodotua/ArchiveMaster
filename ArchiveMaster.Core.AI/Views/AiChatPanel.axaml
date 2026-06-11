@@ -2,11 +2,13 @@
     x:Class="ArchiveMaster.Views.AiChatPanel"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:avalonia="clr-namespace:FluentIcons.Avalonia;assembly=FluentIcons.Avalonia"
     xmlns:b="using:ArchiveMaster.Behaviors"
     xmlns:cvt="clr-namespace:ArchiveMaster.Converters;assembly=ArchiveMaster.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:enums="using:ArchiveMaster.Enums"
     xmlns:ic="using:FluentIcons.Avalonia.Markup"
+    xmlns:ic2="using:FluentIcons.Avalonia"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:ArchiveMaster.ViewModels;assembly=ArchiveMaster.Core"
     d:DesignHeight="450"
@@ -124,17 +126,15 @@
                                 <StackPanel
                                     Orientation="Horizontal"
                                     Spacing="8">
-                                    <Button
+                                    <SplitButton
                                         Classes="Icon ChatButton"
+                                        Click="CopyButton_Click"
                                         Content="{ic:FluentIcon Icon=Copy}"
                                         IsVisible="{Binding IsFrozen}"
+                                        Tag="PlainText"
                                         ToolTip.Tip="复制内容">
-                                        <Button.Flyout>
+                                        <SplitButton.Flyout>
                                             <MenuFlyout>
-                                                <MenuItem
-                                                    Click="CopyButton_Click"
-                                                    Header="复制文本"
-                                                    Tag="PlainText" />
                                                 <MenuItem
                                                     Click="CopyButton_Click"
                                                     Header="复制原始内容（MarkDown）"
@@ -144,8 +144,8 @@
                                                     Header="复制思考内容"
                                                     Tag="ThinkText" />
                                             </MenuFlyout>
-                                        </Button.Flyout>
-                                    </Button>
+                                        </SplitButton.Flyout>
+                                    </SplitButton>
                                     <Button
                                         Classes="Icon ChatButton"
                                         Command="{Binding $parent[UserControl].Conversation.RegenerateCommand}"
@@ -277,18 +277,7 @@
                     Foreground="White"
                     IsEnabled="{Binding $parent[UserControl].CanSend}"
                     IsVisible="{Binding !$parent[UserControl].Conversation.SendCommand.IsRunning}"
-                    ToolTip.Tip="发送">
-                    <!-- <Button.IsEnabled> -->
-                    <!--     <MultiBinding Converter="{x:Static cvt:Converters.OrLogic}"> -->
-                    <!--  <Binding  -->
-                    <!--  Converter="{x:Static cvt:Converters.IsNotNull}"  -->
-                    <!--  Path="$parent[UserControl].Conversation.InputText" />  -->
-                    <!--  <Binding  -->
-                    <!--  Converter="{x:Static cvt:Converters.CountGreaterThanZero}"  -->
-                    <!--  Path="$parent[UserControl].Conversation.Attachments" />  -->
-                    <!--     </MultiBinding> -->
-                    <!-- </Button.IsEnabled> -->
-                </Button>
+                    ToolTip.Tip="发送" />
                 <Button
                     Background="Red"
                     Classes="ChatButton"
